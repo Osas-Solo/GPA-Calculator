@@ -18,18 +18,18 @@ public class Home extends Application {
     static BorderPane windowContent;
     ScrollPane scroll;
     static HBox bar;
-    static Button home;
-    static Button help;
-    static Button about;
+    static Button homeButton;
+    static Button helpButton;
+    static Button aboutButton;
     VBox centreContent;
     ImageView logo;
     Label courseNumberLabel;
-    static TextField courseNumber;
-    Button proceed;
+    static TextField courseNumberInput;
+    Button proceedButton;
     VBox bottomContent;
     Label productionLabel;
-    String num;
-    static int n;
+    String courseNumberText;
+    static int courseNumber;
     Alert error;
 
     @Override
@@ -45,13 +45,13 @@ public class Home extends Application {
         //  top content
         bar = new HBox();
         bar.setId("bar");
-        home = new Button("_Home");
-        home.getStyleClass().add("bar-button");
-        help = new Button("H_elp");
-        help.getStyleClass().add("bar-button");
-        about = new Button("_About");
-        about.getStyleClass().add("bar-button");
-        bar.getChildren().addAll(home, help, about);
+        homeButton = new Button("_Home");
+        homeButton.getStyleClass().add("bar-button");
+        helpButton = new Button("H_elp");
+        helpButton.getStyleClass().add("bar-button");
+        aboutButton = new Button("_About");
+        aboutButton.getStyleClass().add("bar-button");
+        bar.getChildren().addAll(homeButton, helpButton, aboutButton);
         windowContent.setTop(bar);
 
         //  centre content
@@ -60,10 +60,10 @@ public class Home extends Application {
         centreContent.setAlignment(Pos.CENTER);
         logo = new ImageView("FUPRE_LOGO.png");
         courseNumberLabel = new Label("Enter number of courses:");
-        courseNumber = new TextField();
-        courseNumber.setPromptText("Number of courses");
-        proceed = new Button("Proceed");
-        centreContent.getChildren().addAll(logo, courseNumberLabel, courseNumber, proceed);
+        courseNumberInput = new TextField();
+        courseNumberInput.setPromptText("Number of courses");
+        proceedButton = new Button("Proceed");
+        centreContent.getChildren().addAll(logo, courseNumberLabel, courseNumberInput, proceedButton);
         windowContent.setCenter(centreContent);
 
         //  bottom content
@@ -91,20 +91,20 @@ public class Home extends Application {
 
         //  Action events
 
-        Home.help.setOnAction(e -> {
-            Home.goHelp(window);
+        helpButton.setOnAction(e -> {
+            goHelp(window);
         });
 
-        Home.about.setOnAction(e -> {
-            Home.goAbout(window);
+        aboutButton.setOnAction(e -> {
+            goAbout(window);
         });
 
-        proceed.setOnAction( e -> {
-            num = courseNumber.getText();
+        proceedButton.setOnAction(e -> {
+            courseNumberText = courseNumberInput.getText();
             try {
-                n = Integer.parseInt(num);
+                courseNumber = Integer.parseInt(courseNumberText);
                 new Calculator();
-                primaryStage.hide();
+                window.hide();
             } catch (NumberFormatException e1) {
                 error.setContentText("Please enter a valid integer in the text field");
                 error.show();
@@ -115,7 +115,7 @@ public class Home extends Application {
 
     public static void goHome(Stage window) {
         Home.windowContent.setTop(Home.bar);
-        Home.courseNumber.setText("");
+        Home.courseNumberInput.setText("");
         Home.window.show();
         window.hide();
     }  //  end goHome

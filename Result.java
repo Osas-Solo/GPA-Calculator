@@ -21,6 +21,7 @@ public class Result {
     TableView<ResultDetails> table;
     TableColumn<ResultDetails, String> courseCodeCol, creditUnitCol, gradeCol;
     Label tnuLabel, tcpLabel, gpaLabel, remarkLabel;
+    Button backButton;
     VBox bottomContent;
     Label productionLabel;
 
@@ -58,7 +59,10 @@ public class Result {
         gpaLabel = new Label("Grade Point Average (GPA) = " + String.format("%.2f", Calculator.gpa));
         remarkLabel = new Label("Remark: " + getRemark(Calculator.gpa));
 
-        centreContent.getChildren().addAll(logo, table, tnuLabel, tcpLabel, gpaLabel, remarkLabel);
+        //  back button
+        backButton = new Button("Back");
+
+        centreContent.getChildren().addAll(logo, table, tnuLabel, tcpLabel, gpaLabel, remarkLabel, backButton);
         windowContent.setCenter(centreContent);
 
         //  bottom content
@@ -87,16 +91,22 @@ public class Result {
 
         //  Action events
 
-        Home.home.setOnAction(e -> {
+        Home.homeButton.setOnAction(e -> {
             Home.goHome(window);
         });
 
-        Home.help.setOnAction(e -> {
+        Home.helpButton.setOnAction(e -> {
             Home.goHelp(window);
         });
 
-        Home.about.setOnAction(e -> {
+        Home.aboutButton.setOnAction(e -> {
             Home.goAbout(window);
+        });
+
+        backButton.setOnAction(e -> {
+            Calculator.window.show();
+            Calculator.windowContent.setTop(Home.bar);
+            this.window.hide();
         });
 
 
@@ -105,7 +115,7 @@ public class Result {
     public ObservableList<ResultDetails> getResult() {
         ObservableList<ResultDetails> result = FXCollections.observableArrayList();
 
-        for (int i = 0; i < Home.n; i++) {
+        for (int i = 0; i < Home.courseNumber; i++) {
             result.add(new ResultDetails(
                     Calculator.courseCodeTexts[i],
                     Calculator.cu[i],

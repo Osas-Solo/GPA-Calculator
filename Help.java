@@ -33,7 +33,7 @@ public class Help {
         centreContent.setPadding(new Insets(10, 10, 10,10));
         centreContent.setAlignment(Pos.CENTER);
 
-        //  about content
+        //  aboutButton content
         help = new Text("This GPA Calculator is based on FUPRE's grading system.\n\n\n" +
                 "How to use this GPA Calculator: \n" +
                 "1. Enter the number of courses to be calculated in the text field.\n" +
@@ -94,11 +94,17 @@ public class Help {
 
         //  Action events
 
-        Home.home.setOnAction(e -> {
+        Home.homeButton.setOnAction(e -> {
             Home.goHome(window);
         });
 
-        Home.about.setOnAction(e -> {
+        Home.helpButton.setOnAction(e -> {
+            if (!window.isShowing()) {
+                Home.goHelp(window);
+            }
+        });
+
+        Home.aboutButton.setOnAction(e -> {
             Home.goAbout(window);
         });
 

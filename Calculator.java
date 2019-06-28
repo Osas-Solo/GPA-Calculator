@@ -1,4 +1,3 @@
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -11,10 +10,10 @@ import javafx.scene.layout.*;
 
 public class Calculator {
 
-    Stage window;
+    static Stage window;
     Scene calculatorScene;
     ScrollPane scroll;
-    BorderPane windowContent;
+    static BorderPane windowContent;
     VBox centreContent;
     ImageView logo;
     GridPane gradeCollector;
@@ -61,15 +60,15 @@ public class Calculator {
         gradeCollector.setPadding(new Insets(10, 10, 10, 10));
         gradeCollector.setHgap(10);
         gradeCollector.setVgap(10);
-        gradesLayout = new TilePane[Home.n];
-        courseCodeLabels = new Label[Home.n];
-        courseCodes = new TextField[Home.n];
-        creditUnitLabels = new Label[Home.n];
-        creditUnits = new TextField[Home.n];
-        gradeLabels = new Label[Home.n];
-        grades = new ChoiceBox[Home.n];
+        gradesLayout = new TilePane[Home.courseNumber];
+        courseCodeLabels = new Label[Home.courseNumber];
+        courseCodes = new TextField[Home.courseNumber];
+        creditUnitLabels = new Label[Home.courseNumber];
+        creditUnits = new TextField[Home.courseNumber];
+        gradeLabels = new Label[Home.courseNumber];
+        grades = new ChoiceBox[Home.courseNumber];
 
-        for (int i = 0; i < Home.n; i++) {  //  initialise each gradeCollector array
+        for (int i = 0; i < Home.courseNumber; i++) {  //  initialise each gradeCollector array
             gradesLayout[i] = new TilePane();
             gradesLayout[i].setAlignment(Pos.CENTER);
             gradesLayout[i].setBorder(new Border(new BorderStroke(Color.web("#000033"),
@@ -98,8 +97,8 @@ public class Calculator {
 
         int c = 0;
 
-        if (Home.n % 5 == 0) {  //  GridPane constraints for 5-multiple number of courses
-            for (int row = 0; row < (Home.n / 5); row++) {
+        if (Home.courseNumber % 5 == 0) {  //  GridPane constraints for 5-multiple number of courses
+            for (int row = 0; row < (Home.courseNumber / 5); row++) {
                 for (int col = 0; col < 5; col++) {
                     GridPane.setConstraints(gradesLayout[c], col, row);
                     c++;
@@ -107,8 +106,8 @@ public class Calculator {
             }
         }
 
-        else if (Home.n % 4 == 0) {  //  GridPane constraints for 4-multiple number of courses
-            for (int row = 0; row < (Home.n / 4); row++) {
+        else if (Home.courseNumber % 4 == 0) {  //  GridPane constraints for 4-multiple number of courses
+            for (int row = 0; row < (Home.courseNumber / 4); row++) {
                 for (int col = 0; col < 4; col++) {
                     GridPane.setConstraints(gradesLayout[c], col, row);
                     c++;
@@ -116,8 +115,8 @@ public class Calculator {
             }
         }
 
-        else if (Home.n % 3 == 0) {  //  GridPane constraints for 3-multiple number of courses
-            for (int row = 0; row < (Home.n / 3); row++) {
+        else if (Home.courseNumber % 3 == 0) {  //  GridPane constraints for 3-multiple number of courses
+            for (int row = 0; row < (Home.courseNumber / 3); row++) {
                 for (int col = 0; col < 3; col++) {
                     GridPane.setConstraints(gradesLayout[c], col, row);
                     c++;
@@ -126,8 +125,8 @@ public class Calculator {
         }
 
 
-        else if (Home.n % 2 == 0) {  //  GridPane constraints for even-number of courses
-            for (int row = 0; row < (Home.n / 2); row++) {
+        else if (Home.courseNumber % 2 == 0) {  //  GridPane constraints for even-number of courses
+            for (int row = 0; row < (Home.courseNumber / 2); row++) {
                 for (int col = 0; col < 2; col++) {
                     GridPane.setConstraints(gradesLayout[c], col, row);
                     c++;
@@ -136,18 +135,18 @@ public class Calculator {
         }
 
         else {  //  GridPane constraints for any other number of courses
-            for (int row = 0; row <= (Home.n / 3); row++) {
+            for (int row = 0; row <= (Home.courseNumber / 3); row++) {
                 for (int col = 0; col < 3; col++) {
                     GridPane.setConstraints(gradesLayout[c], col, row);
                     c++;
-                    if (c == Home.n) {  // check if every gradesLayout has been positioned
+                    if (c == Home.courseNumber) {  // check if every gradesLayout has been positioned
                         break;
                     }
                 }
             }
         }
 
-        for (int i = 0; i < Home.n; i++) {
+        for (int i = 0; i < Home.courseNumber; i++) {
             gradeCollector.getChildren().add(gradesLayout[i]);
         }
 
@@ -179,15 +178,15 @@ public class Calculator {
 
         //  Action events
 
-        Home.home.setOnAction(e -> {
+        Home.homeButton.setOnAction(e -> {
             Home.goHome(window);
         });
 
-        Home.help.setOnAction(e -> {
+        Home.helpButton.setOnAction(e -> {
             Home.goHelp(window);
         });
 
-        Home.about.setOnAction(e -> {
+        Home.aboutButton.setOnAction(e -> {
             Home.goAbout(window);
         });
 
@@ -205,16 +204,16 @@ public class Calculator {
 
     public void calculateGpa() {
         //  initialise arrays
-        courseCodeTexts = new String[Home.n];
-        creditUnitTexts = new String[Home.n];
-        cu = new int[Home.n];
-        g = new String[Home.n];
-        ratings = new int[Home.n];
-        cp = new int[Home.n];
+        courseCodeTexts = new String[Home.courseNumber];
+        creditUnitTexts = new String[Home.courseNumber];
+        cu = new int[Home.courseNumber];
+        g = new String[Home.courseNumber];
+        ratings = new int[Home.courseNumber];
+        cp = new int[Home.courseNumber];
         tnu = 0;
         tcp = 0;
 
-        for (int i = 0; i < Home.n; i++) {  //  get entered inputs
+        for (int i = 0; i < Home.courseNumber; i++) {  //  get entered inputs
             courseCodeTexts[i] = courseCodes[i].getText();
             creditUnitTexts[i] = creditUnits[i].getText();
             cu[i] = Integer.parseInt(creditUnitTexts[i]);

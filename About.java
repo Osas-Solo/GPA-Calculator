@@ -33,13 +33,16 @@ public class About {
         centreContent.setPadding(new Insets(10, 10, 10,10));
         centreContent.setAlignment(Pos.CENTER);
 
-        //  about content
-        about = new Text("Version: 1.0.0\n\n" +
+        //  aboutButton content
+        about = new Text("Version: 1.1.0\n\n" +
                 "Coded by Ukpebor Osaremhen, a Computer Science student at the Federal " +
                 "University of Petroleum Resources\n\n" +
                 "For suggestions and complaints, contact me @:\n" +
                 "Osas.Solo25@gmail.com\n" +
-                "08154028194 (WhatsApp only)");
+                "08154028194 (WhatsApp only)" +
+                "\n\nNew in this version:\n" +
+                "- Fixed multiple window bug for Help and About window\n" +
+                "- Added back button to the result window");
         about.getStyleClass().add("info-text");
 
         centreContent.getChildren().addAll(about);
@@ -65,12 +68,18 @@ public class About {
 
         //  Action events
 
-        Home.home.setOnAction(e -> {
+        Home.homeButton.setOnAction(e -> {
             Home.goHome(window);
         });
 
-        Home.help.setOnAction(e -> {
+        Home.helpButton.setOnAction(e -> {
             Home.goHelp(window);
+        });
+
+        Home.aboutButton.setOnAction(e -> {
+            if (!window.isShowing()) {
+                Home.goAbout(window);
+            }
         });
 
 

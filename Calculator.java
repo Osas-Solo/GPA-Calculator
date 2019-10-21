@@ -10,10 +10,13 @@ import javafx.scene.layout.*;
 
 public class Calculator {
 
+    //  main container
     static Stage window;
     Scene calculatorScene;
-    ScrollPane scroll;
+    ScrollPane scroller;
     static BorderPane windowContent;
+
+    //  centre content
     VBox centreContent;
     ImageView logo;
     GridPane gradeCollector;
@@ -24,10 +27,9 @@ public class Calculator {
     TextField[] creditUnits;
     Label[] gradeLabels;
     ChoiceBox<String> grades[];
-    Button calculate;
-    VBox bottomContent;
-    Label productionLabel;
-    Alert error;
+    Button calculateButton;
+
+    Alert errorAlert;
     static String[] courseCodeTexts;
     String[] creditUnitTexts;
     static int[] cu;
@@ -42,9 +44,9 @@ public class Calculator {
         //  main container
         window = new Stage();
         windowContent = new BorderPane();
-        scroll = new ScrollPane(windowContent);
-        scroll.setFitToWidth(true);
-        scroll.setFitToHeight(true);
+        scroller = new ScrollPane(windowContent);
+        scroller.setFitToWidth(true);
+        scroller.setFitToHeight(true);
 
         //  top content
         windowContent.setTop(Home.bar);
@@ -150,18 +152,12 @@ public class Calculator {
             gradeCollector.getChildren().add(gradesLayout[i]);
         }
 
-        calculate = new Button("Calculate");
-        centreContent.getChildren().addAll(logo, gradeCollector, calculate);
+        calculateButton = new Button("Calculate");
+        centreContent.getChildren().addAll(logo, gradeCollector, calculateButton);
         windowContent.setCenter(centreContent);
 
-        //  bottom content
-        bottomContent = new VBox();
-        productionLabel = new Label("© 2018 OS Tech");
-        bottomContent.getChildren().add(productionLabel);
-        windowContent.setBottom(bottomContent);
-
         //  calculatorScene
-        calculatorScene = new Scene(scroll);
+        calculatorScene = new Scene(scroller);
         calculatorScene.getStylesheets().add("LightStyle.css");
 
         //  create window
@@ -171,10 +167,12 @@ public class Calculator {
         window.show();
 
         //  Error dialog
-        error = new Alert(Alert.AlertType.ERROR);
-        error.setTitle("Credit Unit Error");
-        error.setHeaderText(null);
-        error.setContentText("Please enter valid integer(s) in the credit unit text field(s)");
+        errorAlert = new Alert(Alert.AlertType.ERROR);
+        errorAlert.setTitle("Credit Unit Error");
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText("Please enter valid integer(s) (integers > 0) in the credit unit text field(s)");
+
+        Home.previousWindow = window;
 
         //  Action events
 
@@ -190,19 +188,19 @@ public class Calculator {
             Home.goAbout(window);
         });
 
-        calculate.setOnAction(e -> {
+        calculateButton.setOnAction(e -> {
             try {
                 calculateGpa();
                 new Result();
                 window.hide();
             } catch (Exception e1) {
-                error.show();
+                errorAlert.show();
             }
         });
 
     }  // end of constructor
 
-    public void calculateGpa() {
+    public void calculateGpa() throws Exception {
         //  initialise arrays
         courseCodeTexts = new String[Home.courseNumber];
         creditUnitTexts = new String[Home.courseNumber];
@@ -217,6 +215,9 @@ public class Calculator {
             courseCodeTexts[i] = courseCodes[i].getText();
             creditUnitTexts[i] = creditUnits[i].getText();
             cu[i] = Integer.parseInt(creditUnitTexts[i]);
+            if (cu[i] < 0) {
+                throw new Exception();
+            }
             g[i] = grades[i].getValue();
 
             //  convert grade to ratings

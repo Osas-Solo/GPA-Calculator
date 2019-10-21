@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Whot - Help</title>
+
+        <link rel = "stylesheet" href = "html_style.css">
+    </head>
+
+    <body>
+
+        <h1>Help</h1>
+
+        <p>This GPA Calculator is based on FUPRE's grading system.</p>
+
+        <h2>How to use this GPA Calculator:</h2>
+        <ol>
+            <li>Enter the number of courses to be calculated in the text field.</li>
+            <li>Click Proceed.
+            <li>
+                Enter Course Code, Credit Unit and select Grade for each course. Ensure that every
+                credit unit text field is filled before continuing.
+            </li>
+            <li>Click Calculate.</li>
+            <li>The result of the calculation is then displayed.</li>
+        </ol>
+
+        <h2>How to Calculate GPA manually:</h2>
+        <table>
+            <caption>Performance Rating:</caption>
+
+            <tr>
+                <th>Score</th>
+                <th>Grade</th>
+                <th>Rating</th>
+            </tr>
+
+            <tr>
+                <td>70 - 100</td>
+                <td>A</td>
+                <td>5</td>
+            </tr>
+
+            <tr>
+                <td>60 - 69</td>
+                <td>B</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>50 - 59</td>
+                <td>C</td>
+                <td>3</td>
+            </tr>
+
+            <tr>
+                <td>45 - 49</td>
+                <td>D</td>
+                <td>2</td>
+            </tr>
+                     
+            <tr>
+                <td>0 - 44</td>
+                <td>F</td>
+                <td>0</td>
+            </tr>
+    
+        </table>
+        
+        <p>
+            The Credit Point (CP) of each course is calculated by:<br>
+        
+            CP = Credit Unit (CU) * Rating<br>
+            The Total Number of Units (TNU) is gotten by summing the CU of all the courses used in the calculation.<br>
+            The Total Credit Point (TCP) is gotten by summing the CP of all the courses used in the calculation.<br>
+            The Grade Point Average (GPA) then calculated:<br>
+            GPA = TCP / TNU
+        </p>
+
+        <p>
+            For Cumulative GPA (CGPA) calculation:<br>
+            The summation of every TNU is gotten from every semester from beginning to date as Cumulative Number of Units (CNU).
+            While the summation of every TCP is gotten as Cumulative Credit Point (CCP).<br>
+            
+            Then the CGPA is calculated:<br>
+            CGPA = CCP / CNU
+        </p>
+
+        <table>
+            
+            <caption>Classification:</caption> 
+            
+            <tr>
+                <th>Class of Degree</th>
+                <th>CGPA</th>
+            </tr>
+
+            <tr>
+                <td>4.50 - 5.00</td>
+                <td>First Class</td>
+            </tr>
+
+            <tr>
+                <td>3.50 - 4.49</td>
+                <td>Second Class Upper Division</td>
+            </tr>
+
+            <tr>
+                <td>2.40 - 3.49</td>
+                <td>Second Class Lower Division</td>
+            </tr>
+
+            <tr>
+                <td>1.50 - 2.39</td>
+                <td>Third Class</td>
+            </tr>
+
+        </table>
+
+    </body>
+
+</html>

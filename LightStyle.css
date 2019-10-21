@@ -1,5 +1,5 @@
 .root {
-    -fx-background-color: transparent;
+    -fx-background: #666699;
     -fx-font-family: Verdana, Arial, sans-serif;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -9,18 +9,18 @@
 }
 
 .scroll-pane {
-    -fx-background: #eddd9e;
+    -fx-background: #666699;
     -fx-alignment: center;
     -fx-vbar-policy: always;
 }
 
 .tile-pane {
     -fx-pref-tile-width: 10;
-    -fx-alignment: CENTER;
+    -fx-alignment: center;
 }
 
 #bar {
-    -fx-background-color: #000033;
+    -fx-background-color: #333366;
     -fx-pref-height: 20;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #000033;
+    -fx-background-color: #333366;
     -fx-pref-height: 20;
 }
 
@@ -55,7 +55,7 @@
  }
 
 .label {
-    -fx-text-fill: #000033;
+    -fx-text-fill: #eddd9e;
 }
 
 .text-field {
@@ -64,7 +64,7 @@
 }
 
 .button {
-    -fx-background-color: #000033;
+    -fx-background-color: #333366;
     -fx-text-fill: #eddd9e;
     -fx-background-radius: 50;
     -fx-pref-width: 120;
@@ -84,12 +84,12 @@
 }
 
 .choice-box {
-    -fx-background-color: #000033;
+    -fx-background-color: #333366;
     -fx-background-radius: 50;
 }
 
 .choice-box .context-menu {
-    -fx-background-color: #000033;
+    -fx-background-color: #333366;
 }
 
 .choice-box .root {
@@ -104,9 +104,13 @@
     -fx-fixed-cell-size: 30;
 }
 
+.table-view .label {
+    -fx-text-fill: #333366;
+}
+
 .table-column {
     -fx-pref-width: 200;
-    -fx-text-fill: #000033;
+    -fx-text-fill: #333366;
 }
 
 .info-text {

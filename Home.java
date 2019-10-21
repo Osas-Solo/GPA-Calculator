@@ -13,24 +13,30 @@ public class Home extends Application {
         launch(args);
     }
 
+    //  main container
     static Stage window;
     static Scene homeScene;
     static BorderPane windowContent;
-    ScrollPane scroll;
+    ScrollPane scroller;
+
+    //  north content
     static HBox bar;
     static Button homeButton;
     static Button helpButton;
     static Button aboutButton;
+
+    //  centre content
     VBox centreContent;
     ImageView logo;
     Label courseNumberLabel;
     static TextField courseNumberInput;
     Button proceedButton;
-    VBox bottomContent;
-    Label productionLabel;
+
+    //  other variables
     String courseNumberText;
     static int courseNumber;
     Alert error;
+    static Stage previousWindow;
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,9 +44,9 @@ public class Home extends Application {
         //  main container
         window = primaryStage;
         windowContent = new BorderPane();
-        scroll = new ScrollPane(windowContent);
-        scroll.setFitToWidth(true);
-        scroll.setFitToHeight(true);
+        scroller = new ScrollPane(windowContent);
+        scroller.setFitToWidth(true);
+        scroller.setFitToHeight(true);
 
         //  top content
         bar = new HBox();
@@ -66,16 +72,8 @@ public class Home extends Application {
         centreContent.getChildren().addAll(logo, courseNumberLabel, courseNumberInput, proceedButton);
         windowContent.setCenter(centreContent);
 
-        //  bottom content
-        bottomContent = new VBox();
-        bottomContent.setPadding(new Insets(10, 10, 10,10));
-        bottomContent.setAlignment(Pos.CENTER);
-        productionLabel = new Label("© 2018 OS Tech");
-        bottomContent.getChildren().add(productionLabel);
-        windowContent.setBottom(productionLabel);
-
         //  homeScene
-        homeScene = new Scene(scroll);
+        homeScene = new Scene(scroller);
         homeScene.getStylesheets().add("LightStyle.css");
 
         //  create window
@@ -103,10 +101,13 @@ public class Home extends Application {
             courseNumberText = courseNumberInput.getText();
             try {
                 courseNumber = Integer.parseInt(courseNumberText);
+                if (courseNumber <= 0) {
+                    throw  new NumberFormatException();
+                }
                 new Calculator();
                 window.hide();
             } catch (NumberFormatException e1) {
-                error.setContentText("Please enter a valid integer in the text field");
+                error.setContentText("Please enter a valid integer (integer > 0) in the text field");
                 error.show();
             }
         });
@@ -118,16 +119,23 @@ public class Home extends Application {
         Home.courseNumberInput.setText("");
         Home.window.show();
         window.hide();
-    }  //  end goHome
+    }  //  end of goHome
 
     public static void goHelp(Stage window) {
+        previousWindow = window;
         new Help();
         window.hide();
-    }  //  end goHelp
+    }  //  end of goHelp
 
     public static void goAbout(Stage window) {
+        previousWindow = window;
         new About();
         window.hide();
-    }  //  end goAbout
+    }  //  end of goAbout
+
+    public static void goBack(Stage previousWindow, Stage currentWindow) {
+        previousWindow.show();
+        currentWindow.hide();
+    }  //  end of goBack()
 
 }  // end of class

@@ -22,8 +22,6 @@ public class Result {
     TableColumn<ResultDetails, String> courseCodeCol, creditUnitCol, gradeCol;
     Label tnuLabel, tcpLabel, gpaLabel, remarkLabel;
     Button backButton;
-    VBox bottomContent;
-    Label productionLabel;
 
     Result() {
         //  main container
@@ -65,14 +63,6 @@ public class Result {
         centreContent.getChildren().addAll(logo, table, tnuLabel, tcpLabel, gpaLabel, remarkLabel, backButton);
         windowContent.setCenter(centreContent);
 
-        //  bottom content
-        bottomContent = new VBox();
-        bottomContent.setPadding(new Insets(10, 10, 10,10));
-        bottomContent.setAlignment(Pos.CENTER);
-        productionLabel = new Label("© 2018 OS Tech");
-        bottomContent.getChildren().add(productionLabel);
-        windowContent.setBottom(productionLabel);
-
         //  resultScene
         resultScene = new Scene(scroll);
         resultScene.getStylesheets().add("LightStyle.css");
@@ -88,6 +78,8 @@ public class Result {
         error.setTitle("Credit Unit Error");
         error.setHeaderText(null);
         error.setContentText("Please enter valid integer(s) in the credit unit text field(s)");
+
+        Home.previousWindow = window;
 
         //  Action events
 

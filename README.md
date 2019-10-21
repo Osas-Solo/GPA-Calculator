@@ -16,3 +16,4 @@ Download the JAR file and run
 
 ## Release
 
+<a src ="https://github.com/Osas-Solo/GPA-Calculator/releases/download/v1.2.0/GPA.Calculator.1.2.0.jar">GPA Calculator</a>

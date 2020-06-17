@@ -2,7 +2,7 @@
 
 A desktop GPA calculator based on the
 the grading system of Federal University of
-Petroleum Resources, Effurun (FUPRE). It was built
+Petroleum Resources (FUPRE) Nigeria. It was built
 using JavaFX for the front-end and Java to implement the logic.
 
 ![Application screenshot](https://github.com/Osas-Solo/GPA-Calculator/blob/v1.2.0/gpa_calculator.png)
